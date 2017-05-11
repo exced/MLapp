@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Train</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only round small (click)="onClickTrain()">
+        <ion-icon  name="checkmark-circle-outline" is-active="false"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="card-background-page">
+  <ion-searchbar (ionInput)="onGetData($event)" (search)="onGetData($event)"></ion-searchbar>
+  <ion-card *ngFor="let data of datas">
+    <img src="assets/img/{{ data.thumbnail }}">
+    <div class="card-title">{{data.name}}</div>
+    <ion-row no-padding>
+      <ion-col>
+        <button (click)="onClickAddData(data)" ion-button clear small color="danger" icon-left>
+              <ion-icon name='add-circle'></ion-icon>
+              Add
+            </button>
+      </ion-col>
+      <ion-col text-right>
+        <button (click)="onClickInfoData(data)" ion-button clear small color="danger" icon-left>
+              <ion-icon name='information-circle'></ion-icon>
+              Info
+            </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

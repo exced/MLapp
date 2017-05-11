@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Test</ion-title>
+    <ion-buttons end>
+      <button ion-button [disabled]="!input.valid" icon-only round small (click)="onClickPredict()">
+        <ion-icon  name="search" is-active="false"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="input" (ngSubmit)="onClickPredict()">
+    <ion-list>
+      <ion-item *ngFor="let field of fields; let i = index;">
+        <div item-left>{{field.field}}</div>
+        <div item-right>
+          <!-- enumerated type -->
+          <ion-item *ngIf="field.type_enum">
+            <ion-label>select</ion-label>
+            <ion-select formControlName="{{field.field}}" interface="popover">
+              <ion-option *ngFor="let enum of field.type_enum">{{enum}}</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <!-- not enumerated type -->
+          <ion-item *ngIf="!field.type_enum">
+            <ion-label>{{field.type}}</ion-label>
+            <ion-input [min]="0" formControlName="{{field.field}}" type="{{field.type}}"></ion-input>
+          </ion-item>
+        </div>
+      </ion-item>
+    </ion-list>
+  </form>
+  <!-- class -->
+  <div *ngIf="showResult">
+    <ion-item *ngFor="let result of results">
+      <ion-label item-left>{{result.name}} :</ion-label>
+      <ion-label item-right>{{result.score}}</ion-label>
+      <ion-checkbox disabled="true" color="dark" checked="{{result.best}}"></ion-checkbox>
+    </ion-item>
+  </div>
+</ion-content>
