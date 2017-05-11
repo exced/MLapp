@@ -1,7 +1,5 @@
 Simple NodeJS and MongoDB backend.
 
-It uses SPARQL on DBPedia endpoint to execute queries from client.
-
 ### Install
 ```bash
 npm install
@@ -11,5 +9,3 @@ npm install
 ```bash
 ./bin/www
 ```
-
-TODO : sanify inputs
